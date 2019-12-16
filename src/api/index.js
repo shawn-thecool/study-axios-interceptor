@@ -1,16 +1,18 @@
-import axiosInstance from './axios'
+import createAxiosInstance from './axios'
 
-export const useRequest = config => axiosInstance({ ...config })
+const setCommonExceptionHandler = err => {
+  console.log('setCommonExceptionHandler', err)
+}
 
-// interceptor ..
+const useRequest = config =>
+  createAxiosInstance({ ...config })
+    .then(res => {
+      console.log('api-comm-suc', res)
+      return res
+    })
+    .catch(err => {
+      console.log('api-comm-err', err)
+      return Promise.reject({ err: err, handler: setCommonExceptionHandler })
+    })
 
-// 1. auth -- axios.header
-// 2. timestemp 중복 호출방지 - 강제성
-// 3. loading. spec        - 강제성
-// 4. obj[key]
-
-// api = {
-//   testList: {
-//     getList: 1289371298124
-//   }
-// }
+export default useRequest

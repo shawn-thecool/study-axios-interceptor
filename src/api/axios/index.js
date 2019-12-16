@@ -1,5 +1,5 @@
 import axios from 'axios'
-import interceptor from './interceptors'
+import loadingInterceptor from './interceptor.loading'
 
 // create axios instance
 const instance = axios.create()
@@ -18,23 +18,17 @@ instance.defaults.timeout = 10000
 // set default config - fn
 instance.defaults.validateStatus = status => status >= 200 && status < 300 //default
 
-// set interceptor for request - 로딩제어
-instance.interceptors.request.use(interceptor.checkLoading.onReqSuccess, interceptor.checkLoading.onReqError)
-
-// set interceptor for request - 중복방지
+// set interceptor for request - loading
 instance.interceptors.request.use(
-  interceptor.checkDuplicateCalls.onReqSuccess,
-  interceptor.checkDuplicateCalls.onReqError
+  loadingInterceptor.onReqSuccess,
+  loadingInterceptor.onReqError
 )
 
-// set interceptor for response - 중복방지
+// set interceptor for response - loading
 instance.interceptors.response.use(
-  interceptor.checkDuplicateCalls.onResSuccess,
-  interceptor.checkDuplicateCalls.onResError
+  loadingInterceptor.onResSuccess,
+  loadingInterceptor.onResError
 )
-
-// set interceptor for response - 로딩제어
-instance.interceptors.response.use(interceptor.checkLoading.onResSuccess, interceptor.checkLoading.onResError)
 
 // export fresh axios instance
 export default instance

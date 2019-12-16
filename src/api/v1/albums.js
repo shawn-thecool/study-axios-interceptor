@@ -1,24 +1,51 @@
-import { useRequest } from '../index'
+import useRequest from '../index'
 
-const getUsers = async () => {
-  try {
-    let d = await useRequest({
-      method: 'get',
-      url: 'api/v1/albums'
-    })
-    let d1 = await parser(d)
-    return d1
-  } catch (error) {
-    // 내부녀석 throw new Error ('msg')
-    console.log(error.message)
-    // commonErrorHandler(error)
-    return 'err'
+const getUsers = () => {
+  const REQUEST_CONFIG = {
+    method: 'get',
+    url: 'api/v1/albums'
   }
+  return useRequest(REQUEST_CONFIG)
 }
 
-const getUserByID = () => {}
+const getError = () => {
+  const REQUEST_CONFIG = {
+    method: 'get',
+    url: 'api/v1/albums/test'
+  }
+  return useRequest(REQUEST_CONFIG)
+}
+
+const getUserByName = userName => {
+  const REQUEST_CONFIG = {
+    method: 'get',
+    url: `api/v1/albums/${userName}`
+  }
+  return useRequest(REQUEST_CONFIG)
+}
+
+const createAlbum = userInfo => {
+  const REQUEST_CONFIG = {
+    method: 'post',
+    url: 'api/v1/albums',
+    body: { ...userInfo }
+  }
+  return useRequest(REQUEST_CONFIG)
+}
+
+const updateAlbumByName = (userName, userInfo) => {
+  const REQUEST_CONFIG = {
+    method: 'put',
+    url: `api/v1/albums/${userName}`,
+    body: { ...userInfo }
+  }
+  return useRequest(REQUEST_CONFIG)
+}
 
 export default {
   getUsers,
-  getUserByID
+  getUserByName,
+  createAlbum,
+  updateAlbumByName,
+  getError
 }
