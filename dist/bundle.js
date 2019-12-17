@@ -12290,7 +12290,9 @@ var onResError = function onResError(err) {
   onResSuccess: onResSuccess,
   onReqError: onReqError,
   onResError: onResError
-});
+}); // spiner Array.some = true
+// dom spiner global context
+// 전달 방식 / 동작 방식
 
 /***/ }),
 
@@ -12415,49 +12417,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_v1_albums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api/v1/albums */ "./src/api/v1/albums.js");
 
 console.log('main.js'); // component = home
-// userAPI
-//   .getUsers()
-//   .then(({ data }) => console.log('comp-suc', data))
-//   .catch(({ err, handler }) => handler(err))
 
-_api_v1_albums__WEBPACK_IMPORTED_MODULE_0__["default"].getError().then(function (_ref) {
+_api_v1_albums__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (_ref) {
   var data = _ref.data;
-  return console.log('comp-suc', data);
+  console.log('comp-suc', data);
 })["catch"](function (_ref2) {
   var err = _ref2.err,
       handler = _ref2.handler;
-  //handler(err)
-  console.log('custom-error', err);
-}); // Promise.all([userAPI.getUsers(), userAPI.getError()])
+  return handler(err);
+}); // userAPI
+//   .getError()
+//   .then(({ data }) => console.log('comp-suc', data))
+//   .catch(({ err, handler }) => {
+//     handler(err)
+//     //do something
+//     console.log('custom-error', err)
+//   })
+// Promise.all([userAPI.getUsers(), userAPI.getError()])
 //   .then(res => {
 //     console.log('11', res)
 //   })
 //   .catch(err => {
 //     console.log('11-err', err)
 //   })
-// <root>
-//   <Context.provider>
-//     <header></header> // memo
-//     <rotuer>
-//       <home>
-//         <Context.provider>
-//           <popup></popup> // hooks
-//           <loading></loading> // hooks
-//         </Context.provider>
-//       </home>
-//       <about>
-//         <Context.provider>
-//           <popup></popup> // hooks
-//           <loading></loading> // hooks
-//         </Context.provider>
-//       </about>
-//     </rotuer>
-//     <footer></footer> // memo
-//     <popup></popup> // context
-//     <loading></loading> // context
-//   </Context.provider>
-// </root>
+
+{}
+/* <root>
+ <Context.provider>
+   <header></header> // memo
+   <rotuer>
+     <home>
+       <Context.provider>
+         <popup></popup> // hooks
+         <loading></loading> // hooks
+       </Context.provider>
+     </home>
+     <about>
+       <Context.provider>
+         <popup></popup> // hooks
+         <loading></loading> // hooks
+       </Context.provider>
+     </about>
+   </rotuer>
+   <footer></footer> // memo
+   <popup></popup> // context
+   <Context.provider>
+     <loading></loading> // context
+   </Context.provider>
+ </Context.provider>
+</root> */
 // respone / err hanler 사용 가능 / _isLoading 뽑아서 사용 가능
+// mobx - class @ es7
+// redux / rxjs - typescript - observer
 
 /***/ }),
 

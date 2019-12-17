@@ -26,3 +26,7 @@ export default {
   onReqError,
   onResError
 }
+
+// spiner Array.some = true
+// dom spiner global context
+// 전달 방식 / 동작 방식
