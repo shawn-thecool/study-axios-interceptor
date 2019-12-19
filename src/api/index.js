@@ -4,7 +4,7 @@ const setCommonExceptionHandler = err => {
   console.log('setCommonExceptionHandler', err)
 }
 
-const useRequest = config =>
+const createRequest = (version, config) =>
   createAxiosInstance({ ...config })
     .then(res => {
       console.log('api-comm-suc', res)
@@ -14,5 +14,7 @@ const useRequest = config =>
       console.log('api-comm-err', err)
       return Promise.reject({ err: err, handler: setCommonExceptionHandler })
     })
+
+
 
 export default useRequest
